@@ -1,21 +1,23 @@
-# backend/app.py
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from name_generator import generate_chinese_name
-from lunar_converter import convert_to_lunar
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/api/generate', methods=['POST'])
-def generate():
-    data = request.json
-    name = generate_chinese_name(data['first_name'], data['last_name'], data['dob'], data['nationality'])
-    lunar_info = convert_to_lunar(data['dob'])
-    return jsonify({
-        "chinese_name": name['name'],
-        "meaning": name['meaning'],
-        "poem_reference": name['poem'],
-        "lunar_date": lunar_info
-    })
+@app.route("/api/generate-name", methods=["POST"])
+def generate_name():
+    data = request.get_json()
+    first_name = data.get("first_name")
+    last_name = data.get("last_name")
+    birthdate = data.get("birthdate")
+    nationality = data.get("nationality")
 
-if __name__ == '__main__':
+    if not all([first_name, last_name, birthdate, nationality]):
+        return jsonify({"error": "Missing required fields."}), 400
+
+    result = generate_chinese_name(first_name, last_name, birthdate, nationality)
+    return jsonify(result)
+
+if __name__ == "__main__":
     app.run(debug=True)
