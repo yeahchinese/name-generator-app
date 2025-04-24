@@ -4,9 +4,14 @@ import re
 from itertools import product
 import epitran
 import pypinyin
+import pkg_resources
 
 class PhoneticEngine:
     def __init__(self):
+        self.resources_path = pkg_resources.resource_filename(__name__, 'resources')
+        # 验证资源存在
+        if not os.path.exists(self.resources_path):
+            raise RuntimeError(f"资源目录不存在: {self.resources_path}")
         self.resources_path = os.path.join(os.path.dirname(__file__), 'resources')
         self.epi = epitran.Epitran('eng-Latn')
         
