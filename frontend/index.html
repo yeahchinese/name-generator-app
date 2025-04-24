@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elegant Chinese Name Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>取一个信·达·雅的中文名</h1>
+    <p>为你打造兼具音韵美与文化意蕴的中文名字</p>
+  </header>
+
+  <!-- Main form -->
+  <main class="container">
+    <form id="nameForm" class="name-form">
+      <label>First Name:
+        <input type="text" id="firstName" required>
+      </label>
+      <label>Last Name:
+        <input type="text" id="lastName" required>
+      </label>
+      <label>Date of Birth:
+        <input type="date" id="dob" required>
+        <small class="note">🌙 自动转换为农历</small>
+      </label>
+      <label>Nationality:
+        <select id="nationality" required>
+          <option value="" disabled selected>Choose...</option>
+          <option value="US">🇺🇸 USA</option>
+          <option value="UK">🇬🇧 UK</option>
+          <option value="FR">🇫🇷 France</option>
+          <option value="DE">🇩🇪 Germany</option>
+          <option value="JP">🇯🇵 Japan</option>
+          <option value="Other">🌍 Other</option>
+        </select>
+      </label>
+      <button type="submit" class="generate-btn">✨ 生成名字 ✨</button>
+    </form>
+
+    <!-- Result area -->
+    <section id="resultArea" class="result hidden">
+      <div class="scroll-card">
+        <h2 id="chineseName">名字展示</h2>
+        <button id="detailBtn">查看含义与出处</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="detailModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal" class="close-btn">&times;</span>
+      <h3>名字解析</h3>
+      <p><strong>寓意：</strong><span id="meaningText">温润如玉，才华横溢</span></p>
+      <p><strong>诗词引用：</strong><em id="poemText">“山有木兮木有枝，心悦君兮君不知”</em></p>
+      <p><strong>农历生日：</strong><span id="lunarDateText"></span></p>
+      <div class="modal-actions">
+        <button id="shareBtn">📤 分享</button>
+        <button id="retryBtn">🔁 再试一次</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div id="confettiContainer" class="confetti-wrapper hidden"></div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Name Studio | Inspired by Chinese Poetry & Culture</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
