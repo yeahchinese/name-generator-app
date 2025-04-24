@@ -3,78 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Elegant Chinese Name Generator</title>
+  <title>Celestial Naming Studio</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Header -->
   <header class="header">
-    <h1>取一个信·达·雅的中文名</h1>
-    <p>为你打造兼具音韵美与文化意蕴的中文名字</p>
+    <div class="title-wrapper">
+      <h1>Celestial Naming Studio</h1>
+      <p class="subtitle">Create Your Perfect Chinese Name</p>
+    </div>
   </header>
 
-  <!-- Main form -->
+  <!-- Main Container -->
   <main class="container">
+    <!-- Input Form -->
     <form id="nameForm" class="name-form">
-      <label>First Name:
-        <input type="text" id="firstName" required>
-      </label>
-      <label>Last Name:
-        <input type="text" id="lastName" required>
-      </label>
-      <label>Date of Birth:
-        <input type="date" id="dob" required>
-        <small class="note">🌙 自动转换为农历</small>
-      </label>
-      <label>Nationality:
-        <select id="nationality" required>
-          <option value="" disabled selected>Choose...</option>
-          <option value="US">🇺🇸 USA</option>
-          <option value="UK">🇬🇧 UK</option>
-          <option value="FR">🇫🇷 France</option>
-          <option value="DE">🇩🇪 Germany</option>
-          <option value="JP">🇯🇵 Japan</option>
-          <option value="Other">🌍 Other</option>
-        </select>
-      </label>
-      <button type="submit" class="generate-btn">✨ 生成名字 ✨</button>
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" required placeholder="Your given name">
+        </div>
+        
+        <div class="input-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" required placeholder="Your family name">
+        </div>
+
+        <div class="input-group">
+          <label for="dob">Date of Birth</label>
+          <div class="date-wrapper">
+            <input type="date" id="dob" required>
+            <span class="lunar-hint">🌙 Lunar conversion available</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="nationality">Nationality</label>
+          <select id="nationality" required>
+            <option value="" disabled selected>Select your country</option>
+            <option value="AU">🇦🇺 Australia</option> 
+            <option value="US">🇺🇸 United States</option>
+            <option value="UK">🇬🇧 UK</option>
+            <option value="CA">🇨🇦 Canada</option>
+            <option value="KR">🇰🇷 South Korea</option>
+            <option value="JP">🇯🇵 Japan</option>
+            <option value="FR">🇫🇷 France</option>
+            <option value="IT">🇮🇹 Italy</option>
+            <option value="DE">🇩🇪 Germany</option>
+            <option value="ES">🇪🇸 Spain</option>
+            <option value="RU">🇷🇺 Russia</option>
+            <option value="BR">🇧🇷 Brazil</option>
+            <option value="Other">🌍 Other</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="generate-btn">
+        <span class="btn-text">✨ Unveil My Name ✨</span>
+        <div class="loader hidden"></div>
+      </button>
     </form>
 
-    <!-- Result area -->
-    <section id="resultArea" class="result hidden">
-      <div class="scroll-card">
-        <h2 id="chineseName">名字展示</h2>
-        <button id="detailBtn">查看含义与出处</button>
+    <!-- Results Section -->
+    <section id="resultSection" class="result-section hidden">
+      <div class="result-header">
+        <h2>Your Celestial Names</h2>
+        <p class="result-sub">Curated with cultural wisdom</p>
       </div>
+      <div class="name-cards" id="nameCards"></div>
     </section>
   </main>
 
-  <!-- Detail Modal -->
+  <!-- Name Detail Modal -->
   <div id="detailModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
     <div class="modal-content">
-      <span id="closeModal" class="close-btn">&times;</span>
-      <h3>名字解析</h3>
-      <p><strong>寓意：</strong><span id="meaningText">温润如玉，才华横溢</span></p>
-      <p><strong>诗词引用：</strong><em id="poemText">“山有木兮木有枝，心悦君兮君不知”</em></p>
-      <p><strong>农历生日：</strong><span id="lunarDateText"></span></p>
-      <div class="modal-actions">
-        <button id="shareBtn">📤 分享</button>
-        <button id="retryBtn">🔁 再试一次</button>
+      <span class="close-btn">&times;</span>
+      <div class="modal-body">
+        <h3 id="modalName"></h3>
+        <div class="cultural-info">
+          <div class="info-block">
+            <h4>Cultural Significance</h4>
+            <p id="culturalMeaning"></p>
+          </div>
+          <div class="info-block">
+            <h4>Poetic Reference</h4>
+            <blockquote id="poetryReference"></blockquote>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="secondary-btn" id="retryBtn">⟳ Try Again</button>
+          <button class="primary-btn" id="downloadBtn">↓ Download</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Confetti Container -->
-  <div id="confettiContainer" class="confetti-wrapper hidden"></div>
+  <!-- Confetti Animation -->
+  <canvas id="confettiCanvas" class="hidden"></canvas>
 
   <!-- Footer -->
-  <footer>
-    <p>© 2025 Name Studio | Inspired by Chinese Poetry & Culture</p>
+  <footer class="footer">
+    <p>© 2025 Celestial Naming Studio · Preserving Cultural Elegance</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>
