@@ -73,8 +73,11 @@ def generate_name():
         return jsonify({"results": formatted_results})
 
     except Exception as e:
-        logging.error(f"Generation error: {str(e)}")
-        return jsonify({"error": "Name generation failed. Please try again."}), 500
+        logging.error(f"Error details: {str(e)}", exc_info=True)
+        return jsonify({
+            "error": "生成失败",
+            "detail": str(e)[:100]  # 返回部分错误详情
+        }), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
