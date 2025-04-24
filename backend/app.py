@@ -5,7 +5,16 @@ import logging
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://name-generator-*.vercel.app",
+            "http://localhost:*"
+        ],
+        "methods": ["POST"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # 初始化引擎
 name_engine = PhoneticEngine()
