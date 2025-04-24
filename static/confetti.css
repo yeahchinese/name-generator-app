@@ -1,0 +1,13 @@
+/* static/confetti.css */
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ef7c8e;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100px) rotate(0deg); }
+  100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+}
