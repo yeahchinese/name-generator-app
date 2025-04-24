@@ -1,195 +1,248 @@
-/* === Global Styles === */
-body {
-  font-family: 'Playfair Display', serif;
-  background-color: #fae8e0;
-  margin: 0;
-  padding: 0;
-  color: #333;
-  line-height: 1.6;
+/* ===== 全局样式 ===== */
+:root {
+  --moon-white: #F6F5F0;
+  --celadon: #7BA998;
+  --sandalwood: #9A7B4F;
+  --ink-black: #333333;
+  --gold-accent: #C5A47E;
 }
 
-header {
-  text-align: center;
-  background-color: #ef7c8e;
-  color: white;
-  padding: 2rem 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+body {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  background-color: var(--moon-white);
+  color: var(--ink-black);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 页眉 ===== */
+.header {
+  background: var(--celadon);
+  padding: 3rem 1rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  width: 120%;
+  height: 60px;
+  background: url('data:image/svg+xml,<svg viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 25 5 50 10 Q 75 5 100 10 L100 0 L0 0" fill="%237BA998"/></svg>') center/cover;
+  transform: translateX(-50%);
 }
 
 h1 {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.4rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
+.subtitle {
+  font-family: 'Playfair Display';
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ===== 主容器 ===== */
 .container {
-  max-width: 800px;
+  max-width: 880px;
   margin: 2rem auto;
-  padding: 1rem;
+  padding: 0 1.5rem;
+  flex-grow: 1;
 }
 
-/* === Form === */
+/* ===== 表单样式 ===== */
 .name-form {
   display: grid;
-  gap: 1rem;
-  background-color: white;
-  border: 2px solid #d8a7b1;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  gap: 1.8rem;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--sandalwood), 0.15);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px -6px rgba(0,0,0,0.05);
 }
 
-.name-form label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-  font-size: 0.9rem;
+.input-group {
+  position: relative;
 }
 
-.name-form input,
-.name-form select {
-  margin-top: 0.5rem;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.input-group label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  color: var(--ink-black);
+  letter-spacing: 0.03em;
 }
 
-.note {
-  color: #888;
-  font-size: 0.8rem;
-  margin-top: 0.2rem;
-}
-
-.generate-btn {
-  background: linear-gradient(145deg, #ef7c8e, #d86d7e);
-  color: white;
+.input-group input,
+.input-group select {
+  width: 100%;
   padding: 0.8rem 1.2rem;
-  border: none;
+  border: 1px solid rgba(var(--sandalwood), 0.3);
   border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  background: rgba(255,255,255,0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.generate-btn:hover {
-  transform: scale(1.05);
+.input-group input:focus,
+.input-group select:focus {
+  border-color: var(--celadon);
+  box-shadow: 0 0 0 3px rgba(var(--celadon), 0.2);
 }
 
-/* === Result Area === */
-.result {
-  margin-top: 2rem;
-  text-align: center;
+.lunar-hint {
+  font-size: 0.85rem;
+  color: rgba(var(--ink-black), 0.6);
+  margin-top: 0.4rem;
+  display: block;
 }
 
-.scroll-card {
-  background-color: #b6e2d3;
-  border: 4px double #555;
-  padding: 2rem;
-  font-family: 'Noto Serif SC', serif;
-  border-radius: 20px;
-  margin: auto;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-}
-
-.scroll-card h2 {
-  font-size: 2rem;
-  color: #444;
-}
-
-.scroll-card button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  background-color: #d8a7b1;
-  border: none;
+/* ===== 生成按钮 ===== */
+.generate-btn {
+  position: relative;
+  background: linear-gradient(135deg, var(--sandalwood) 0%, var(--celadon) 100%);
   color: white;
-  border-radius: 6px;
-  font-weight: bold;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.generate-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translate(-50%, -50%) rotate(45deg); }
+  100% { transform: translate(150%, 150%) rotate(45deg); }
+}
+
+/* ===== 结果展示 ===== */
+.result-section {
+  margin-top: 3rem;
+  opacity: 0;
+  animation: fadeInUp 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.name-cards {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.name-card {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(var(--sandalwood), 0.15);
+  padding: 1.8rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s;
   cursor: pointer;
 }
 
-/* === Modal === */
+.name-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== 模态框 ===== */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
+  background: rgba(255,255,255,0.96);
+  width: min(90%, 560px);
+  padding: 2.5rem;
+  border-radius: 16px;
   position: relative;
-  animation: fadeIn 0.3s ease;
+  box-shadow: 0 24px 48px -12px rgba(0,0,0,0.15);
 }
 
 .close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.2rem;
+  right: 1.2rem;
+  font-size: 1.8rem;
+  color: rgba(var(--ink-black), 0.6);
   cursor: pointer;
-  font-size: 1.5rem;
-  color: #888;
+  transition: color 0.3s;
 }
 
-.modal-actions {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
+.close-btn:hover {
+  color: var(--celadon);
 }
 
-.modal-actions button {
-  padding: 0.6rem 1.2rem;
-  background-color: #ef7c8e;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* === Confetti Container === */
-.confetti-wrapper {
-  position: fixed;
-  pointer-events: none;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.5) 2px, transparent 2px);
-  background-size: 20px 20px;
-  animation: confettiFall 3s linear infinite;
-  z-index: 9;
-}
-
-@keyframes confettiFall {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 20px; }
-}
-
-/* === Hidden Utility === */
-.hidden {
-  display: none;
-}
-
-footer {
+/* ===== 页脚 ===== */
+.footer {
   text-align: center;
-  margin-top: 3rem;
-  font-size: 0.85rem;
-  color: #aaa;
+  padding: 2rem 1rem;
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: rgba(var(--ink-black), 0.6);
+  border-top: 1px solid rgba(var(--sandalwood), 0.1);
+}
+
+/* ===== 加载动画 ===== */
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+  .name-form {
+    padding: 1.5rem;
+  }
+  
+  .modal-content {
+    padding: 1.8rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
 }
