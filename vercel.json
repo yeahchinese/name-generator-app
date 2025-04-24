@@ -1,0 +1,36 @@
+{
+  "builds": [
+    {
+      "src": "frontend/*", 
+      "use": "@vercel/static",
+      "config": {
+        "distDir": "public"
+      }
+    },
+    {
+      "src": "backend/app.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": [
+          "backend/resources/**",
+          "backend/poetry_db.json",
+          "backend/name_generator.py",
+          "backend/pinyin_engine.py"
+        ],
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/app.py",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/public/$1"
+    }
+  ]
+}
