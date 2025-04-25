@@ -1,31 +1,86 @@
-
+<!-- frontend/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>YeahChinese 名字生成器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Chinese Name Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>中文名字生成器</h1>
-        <form id="nameForm">
-            <input type="text" id="firstName" placeholder="First Name" required>
-            <input type="text" id="lastName" placeholder="Last Name" required>
-            <input type="date" id="birthDate" required>
-            <select id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-            <select id="nationality">
-                <option value="USA">USA</option>
-                <option value="UK">UK</option>
-                <option value="Other">Other</option>
-            </select>
-            <button type="submit">生成中文名</button>
-        </form>
-        <div id="resultArea"></div>
+        <header class="header">
+            <h1>Celestial Name Studio</h1>
+            <p class="subtitle">Your Gateway to Authentic Chinese Names</p>
+        </header>
+
+        <main class="main-content">
+            <form id="nameForm" class="name-form">
+                <div class="input-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" required placeholder="Your given name">
+                </div>
+                
+                <div class="input-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" required placeholder="Your family name">
+                </div>
+
+                <div class="input-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" required>
+                    <span class="input-hint">🌙 Lunar conversion enabled</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="nationality">Nationality</label>
+                    <select id="nationality" required>
+                        <option value="" disabled selected>Select your country</option>
+                        <option value="US">🇺🇸 United States</option>
+                        <option value="AU">🇦🇺 Australia</option>
+                        <option value="KR">🇰🇷 South Korea</option>
+                        <option value="CA">🇨🇦 Canada</option>
+                        <option value="FR">🇫🇷 France</option>
+                        <option value="IT">🇮🇹 Italy</option>
+                        <!-- 更多国家... -->
+                    </select>
+                </div>
+
+                <button type="submit" class="generate-btn">
+                    <span class="btn-text">✨ Unveil My Name ✨</span>
+                    <div class="loader"></div>
+                </button>
+            </form>
+
+            <section id="results" class="results hidden">
+                <h2 class="results-title">Your Celestial Names</h2>
+                <div class="name-cards" id="nameCards"></div>
+            </section>
+        </main>
+
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3 id="modalName"></h3>
+                <div class="cultural-info">
+                    <div class="info-block">
+                        <h4>Cultural Significance</h4>
+                        <p id="culturalMeaning"></p>
+                    </div>
+                    <div class="info-block">
+                        <h4>Poetic Reference</h4>
+                        <blockquote id="poetryReference"></blockquote>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="action-btn secondary" id="retryBtn">⟳ Generate Again</button>
+                    <button class="action-btn primary" id="downloadBtn">↓ Download</button>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
