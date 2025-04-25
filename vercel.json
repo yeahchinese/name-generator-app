@@ -1,20 +1,58 @@
 {
-  "builds": [{
-    "src": "backend/*.py",
-    "use": "@vercel/python",
-    "config": {
-      "includeFiles": [
-        "backend/resources/**",
-        "backend/data/poetry/**",
-        "backend/surname_mapping.json"
-      ],
-      "maxLambdaSize": "15mb",
-      "runtime": "python3.9"
+  "$schema": "https://vercel.com/schemas/vercel.json",
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/app.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": [
+          "backend/resources/**/*.json",
+          "backend/resources/**/*.txt",
+          "backend/data/poetry/**/*.json",
+          "backend/data/surnames/**/*.json",
+          "backend/surname_mapping.json"
+        ],
+        "maxLambdaSize": "20mb",
+        "runtime": "python3.9",
+        "suppressBuildLogs": false
+      }
+    },
+    {
+      "src": "frontend/**/*.html",
+      "use": "@vercel/static"
     }
-  }],
-  "routes": [{
-    "src": "/api/(.*)",
-    "dest": "backend/app.py",
-    "methods": ["POST"]
-  }]
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/app.py",
+      "methods": ["POST", "GET"],
+      "headers": {
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/public/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "frontend/public/assets/$1"
+    }
+  ],
+  "env": {
+    "PYTHONPATH": "./backend",
+    "FLASK_ENV": "production"
+  },
+  "build": {
+    "env": {
+      "NODE_VERSION": "16.x",
+      "PYTHON_VERSION": "3.9.13"
+    }
+  },
+  "regions": ["hkg1"] 
 }
