@@ -87,3 +87,11 @@ def generate_name():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+@app.errorhandler(500)
+def handle_error(e):
+    return jsonify({
+        "error": "生成失败",
+        "suggestion": "请尝试缩短名字长度或更换姓氏",
+        "reference": "https://namechef.co/chinese-name-generator/" 
+    }), 500
