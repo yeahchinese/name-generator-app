@@ -1,9 +1,0 @@
-{
-    "A": [
-        {"pinyin": "安", "meaning": "平安宁静", "gender": "unisex", "weight": 0.9},
-        {"pinyin": "艾", "meaning": "聪明美丽", "gender": "female", "weight": 0.8}
-    ],
-    "B": [
-        {"pinyin": "博", "meaning": "博学广识", "gender": "male", "weight": 0.85}
-    ]
-}
