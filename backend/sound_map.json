@@ -1,9 +1,92 @@
 {
-    "A": [
-        {"pinyin": "安", "meaning": "平安宁静", "gender": "unisex", "weight": 0.9},
-        {"pinyin": "艾", "meaning": "聪明美丽", "gender": "female", "weight": 0.8}
-    ],
-    "B": [
-        {"pinyin": "博", "meaning": "博学广识", "gender": "male", "weight": 0.85}
-    ]
+  "zhang": {
+    "char": "章",
+    "pinyin": "zhang",
+    "meaning": "chapter, seal, order",
+    "gender": "unisex",
+    "weight": 0.85,
+    "source": "CC-CEDICT",
+    "used_in": ["章子怡", "章学诚"]
+  },
+  "wen": {
+    "char": "文",
+    "pinyin": "wen",
+    "meaning": "literature, culture",
+    "gender": "unisex",
+    "weight": 0.92,
+    "source": "CC-CEDICT",
+    "used_in": ["李文", "王文静"]
+  },
+  "yi": {
+    "char": "怡",
+    "pinyin": "yi",
+    "meaning": "joy, harmony, pleasure",
+    "gender": "female",
+    "weight": 0.88,
+    "source": "国家语言资源监测语料库",
+    "used_in": ["李怡", "程怡然"]
+  },
+  "hao": {
+    "char": "浩",
+    "pinyin": "hao",
+    "meaning": "vast, great, grand",
+    "gender": "male",
+    "weight": 0.90,
+    "source": "CC-CEDICT",
+    "used_in": ["王浩", "赵浩然"]
+  },
+  "xin": {
+    "char": "欣",
+    "pinyin": "xin",
+    "meaning": "happy, glad, joy",
+    "gender": "female",
+    "weight": 0.87,
+    "source": "CC-CEDICT",
+    "used_in": ["李欣", "陈欣怡"]
+  },
+  "rui": {
+    "char": "睿",
+    "pinyin": "rui",
+    "meaning": "wise, astute",
+    "gender": "male",
+    "weight": 0.82,
+    "source": "CC-CEDICT",
+    "used_in": ["睿智", "林睿"]
+  },
+  "yao": {
+    "char": "瑶",
+    "pinyin": "yao",
+    "meaning": "precious jade",
+    "gender": "female",
+    "weight": 0.86,
+    "source": "CC-CEDICT",
+    "used_in": ["林瑶", "江瑶"]
+  },
+  "cheng": {
+    "char": "诚",
+    "pinyin": "cheng",
+    "meaning": "sincerity, honesty",
+    "gender": "male",
+    "weight": 0.84,
+    "source": "国家语言资源监测语料库",
+    "used_in": ["王诚", "刘诚"]
+  },
+  "zi": {
+    "char": "子",
+    "pinyin": "zi",
+    "meaning": "child, master, scholar",
+    "gender": "unisex",
+    "weight": 0.91,
+    "source": "CC-CEDICT",
+    "used_in": ["孟子", "子涵"]
+  },
+  "han": {
+    "char": "涵",
+    "pinyin": "han",
+    "meaning": "contain, tolerant",
+    "gender": "female",
+    "weight": 0.89,
+    "source": "CC-CEDICT",
+    "used_in": ["子涵", "林涵"]
+  }
 }
