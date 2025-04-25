@@ -1,18 +1,15 @@
-from pinyin_engine import english_to_pinyin
 import random
 import json
+from pinyin_engine import get_initial_letter
 
-with open("poem_db.json", "r", encoding="utf-8") as f:
-    poems = json.load(f)
+with open("backend/sound_map.json", encoding="utf-8") as f:
+    sound_map = json.load(f)
 
-def generate_chinese_name(first_name, last_name, birthdate, nationality):
-    full_name = f"{first_name} {last_name}"
-    pinyin_list = english_to_pinyin(full_name)
-    chinese_name = ''.join(random.choice(p) for p in pinyin_list if isinstance(p, list))
-    poem_entry = random.choice(poems)
-    return {
-        "name": chinese_name,
-        "poem": poem_entry["line"],
-        "source": poem_entry["source"],
-        "meaning": poem_entry["meaning"]
-    }
+def generate_name(first_name, last_name, gender="unisex"):
+    initial = get_initial_letter(first_name)
+    candidates = sound_map.get(initial.upper(), [])
+    filtered = [c for c in candidates if c["gender"] in [gender, "unisex"]]
+    if not filtered:
+        return {"name": "未知", "meaning": "暂无匹配"}
+    selected = random.choices(filtered, weights=[c["weight"] for c in filtered], k=1)[0]
+    return {"name": selected["pinyin"], "meaning": selected["meaning"]}

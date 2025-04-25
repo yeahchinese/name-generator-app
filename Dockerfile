@@ -1,11 +1,7 @@
 FROM python:3.10-slim
-
 WORKDIR /app
-
-COPY backend/ ./backend/
-
-RUN pip install flask flask-cors
-
+COPY backend/requirements.txt ./
+RUN pip install -r requirements.txt
+COPY backend/ .
 EXPOSE 5000
-
-CMD ["python", "backend/app.py"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

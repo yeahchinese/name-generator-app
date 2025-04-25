@@ -1,11 +1,5 @@
-from sound_map import sound_map
+from pypinyin import lazy_pinyin
 
-def english_to_pinyin(name):
-    result = []
-    name = name.lower()
-    for ch in name:
-        if ch in sound_map:
-            result.append(sound_map[ch])
-        else:
-            result.append(["•"])
-    return result
+def get_initial_letter(name):
+    pinyin = lazy_pinyin(name)
+    return pinyin[0][0] if pinyin else ""
