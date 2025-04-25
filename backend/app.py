@@ -1,9 +1,3 @@
-@app.route('/api/warmup', methods=['GET'])
-def warmup():
-    # 预加载资源
-    NameGenerator()
-    return jsonify({"status": "ready"})
-    
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pinyin_engine import PhoneticEngine
@@ -88,6 +82,12 @@ def generate_name():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 
+@app.route('/api/warmup', methods=['GET'])
+def warmup():
+    # 预加载资源
+    NameGenerator()
+    return jsonify({"status": "ready"})
+    
 @app.errorhandler(500)
 def handle_error(e):
     return jsonify({
