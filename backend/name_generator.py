@@ -1,15 +1,22 @@
-import random
 import json
-from pinyin_engine import get_initial_letter
+import random
 
-with open("backend/sound_map.json", encoding="utf-8") as f:
+with open('sound_map.json', 'r', encoding='utf-8') as f:
     sound_map = json.load(f)
 
-def generate_name(first_name, last_name, gender="unisex"):
-    initial = get_initial_letter(first_name)
-    candidates = sound_map.get(initial.upper(), [])
-    filtered = [c for c in candidates if c["gender"] in [gender, "unisex"]]
-    if not filtered:
-        return {"name": "未知", "meaning": "暂无匹配"}
-    selected = random.choices(filtered, weights=[c["weight"] for c in filtered], k=1)[0]
-    return {"name": selected["pinyin"], "meaning": selected["meaning"]}
+def generate_name(gender="unisex", length=2):
+    # 过滤符合性别的音节
+    candidates = [
+        entry for entry in sound_map.values()
+        if entry["gender"] == gender or entry["gender"] == "unisex"
+    ]
+    if not candidates:
+        return "无可用名字"
+
+    weights = [entry["weight"] for entry in candidates]
+    selected = random.choices(candidates, weights=weights, k=length)
+    return ''.join([s["char"] for s in selected])
+
+# 示例调用
+if __name__ == "__main__":
+    print(generate_name(gender="female"))
