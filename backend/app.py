@@ -1,3 +1,9 @@
+@app.route('/api/warmup', methods=['GET'])
+def warmup():
+    # 预加载资源
+    NameGenerator()
+    return jsonify({"status": "ready"})
+    
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pinyin_engine import PhoneticEngine
