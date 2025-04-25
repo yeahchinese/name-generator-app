@@ -111,8 +111,9 @@ function showDetailModal(data) {
 
 // 通用功能
 function toggleLoader(show) {
-  dom.loader.classList.toggle('hidden', !show);
-  dom.btnText.style.opacity = show ? 0 : 1;
+  document.querySelector('.generate-btn').disabled = show
+  document.getElementById('loader').style.display = show ? 'block' : 'none'
+  document.querySelector('.btn-text').style.opacity = show ? 0.5 : 1
 }
 
 function showError(message) {
